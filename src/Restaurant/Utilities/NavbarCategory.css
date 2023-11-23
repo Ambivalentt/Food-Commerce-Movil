@@ -1,0 +1,11 @@
+.overflow {
+    scrollbar-width: none;
+    overflow-x: auto;
+}
+.overflow::-webkit-scrollbar {
+    display: none; 
+}
+
+ html{
+    scroll-behavior: smooth !important;
+}

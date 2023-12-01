@@ -3,10 +3,9 @@ import { BsFillArrowLeftCircleFill } from "react-icons/bs";
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../Context/AuthProvider';
 import { updateProfile } from 'firebase/auth';
-import { doc, setDoc, getFirestore, getDoc } from 'firebase/firestore'
+import { doc, setDoc, getFirestore } from 'firebase/firestore'
 import { getStorage, ref, uploadBytes, getDownloadURL } from 'firebase/storage'
 import { FormState } from './type';
-import './LoadingBtn.css'
 import { toast, ToastContainer } from 'react-toastify';
 
 const Register = () => {
@@ -70,10 +69,10 @@ const Register = () => {
 
                 setTimeout(() => {
                     navigate('/')
-                }, 2500);
+                }, 1500);
             }
         } catch (error) {
-            toast.error('Error al crear la cuenta');
+            toast.error(`Error al crear la cuenta ${error}`);
         } finally {
             setSubmitting(false);
             toast.dismiss(loadingToast);
@@ -82,9 +81,10 @@ const Register = () => {
     }
 
     return (
-        <main className='max-w-md px-5 my-20 mx-auto flex justify-center flex-col items-center'>
+        <main className='max-w-md px-5 my-32 mx-auto flex justify-center flex-col items-center relative'>
+            <span className='absolute -top-10 z-10 left-10 text-lg font-bold opacity-60'>Registro</span>
             <svg className='fixed top-0' xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320">
-                <path fill="#ff0030" fill-opacity="4" d="M0,288L30,293.3C60,299,120,309,180,272C240,235,300,149,360,138.7C420,128,480,192,540,192C600,192,660,128,720,133.3C780,139,840,213,900,240C960,267,1020,245,1080,224C1140,203,1200,181,1260,197.3C1320,213,1380,267,1410,293.3L1440,320L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"></path>
+                <path fill="#ff0030" d="M0,288L30,293.3C60,299,120,309,180,272C240,235,300,149,360,138.7C420,128,480,192,540,192C600,192,660,128,720,133.3C780,139,840,213,900,240C960,267,1020,245,1080,224C1140,203,1200,181,1260,197.3C1320,213,1380,267,1410,293.3L1440,320L1440,0L1410,0C1380,0,1320,0,1260,0C1200,0,1140,0,1080,0C1020,0,960,0,900,0C840,0,780,0,720,0C660,0,600,0,540,0C480,0,420,0,360,0C300,0,240,0,180,0C120,0,60,0,30,0L0,0Z"></path>
             </svg>
             <button className="fixed top-4 left-4 text-xl" onClick={handleGoBack}>
                 <BsFillArrowLeftCircleFill />
@@ -115,13 +115,13 @@ const Register = () => {
                 </div>
                 <div className='w-full flex justify-end'>
                     <button
-                        className={`border border-[#ff0030] p-1 rounded-xl mt-4 shadow-xl ${submitting ? 'loading' : ''}`}
+                        className={`border bg-[#ff0030] text-white font-semibold hover:scale-105 transition-all p-1 rounded-xl mt-4 shadow-xl ${submitting ? 'bg-opacity-80' : ''}`}
                         type='submit'
                         disabled={submitting}
                     >
                         {submitting ? 'Creando Cuenta...' : 'Registrarme'}
                     </button>
-                    <ToastContainer style={{display: 'none'}} />
+                    <ToastContainer style={{height: '40px'}} />
                 </div>
             </form>
         </main>

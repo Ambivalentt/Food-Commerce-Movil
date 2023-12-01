@@ -46,7 +46,7 @@ const AddToCart = ({ product }: { product: ProductInterface }) => {
     }
 
     return (
-        <footer className="fixed flex py-1 gap-x-5 bottom-0 w-full mb-8 bg-gray-200 h-10 px-5">
+        <footer className="fixed flex py-1 gap-x-5 bottom-0 w-full mb-12 bg-gray-200 h-10 px-5">
             <section className="bg-white flex gap-x-4 items-center w-1/2 justify-between px-5 rounded-xl shadow-xl">
                 <button disabled={cartProductsTemporal?.quantity ? cartProductsTemporal.quantity < 2 : true} onClick={handleQuantityMinus} className="text-xl disabled:opacity-50 ">
                     <BiMinus />

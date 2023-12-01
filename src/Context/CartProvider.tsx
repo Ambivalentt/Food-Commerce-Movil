@@ -2,6 +2,7 @@ import { useContext, createContext, useState, ReactNode, useEffect, Provider, us
 import { CartContextProps, CartProviderFinal, CartProviderTemporal } from './InterfaceCart'
 import { Storage } from '../CartWidget/Storage'
 import CartProducts from '../CartWidget/CartProducts'
+import { OrdersProps } from '../Orders/InterfaceOrder'
 
 
 const CartContext = createContext<CartContextProps | null>(null)
@@ -11,6 +12,8 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     const [cartProductsTemporal, setCartProductsTemporal] = useState<CartProviderTemporal>();
     const [cartProducts, setCartProducts] = useState<CartProviderFinal[]>(() => Storage.get('products') || []);
     const [totalPriceFinal, setTotalPriceFinal] = useState(0);
+    const [orders, setOrders] = useState <OrdersProps[]>(() => Storage.get('orders') || [])
+
     
     const priceFinal = cartProducts.reduce((acc, item) => {
         acc += item.price
@@ -33,6 +36,7 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
 
     useEffect(() => {
         Storage.add('products', cartProducts)
+        Storage.add('orders', orders)
         setTotalPriceFinal(priceFinal)
     }, [cartProducts])
 
@@ -44,7 +48,9 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
             cartProductsTemporal,
             setCartProductsTemporal,
             totalPriceFinal,
-            setTotalPriceFinal
+            setTotalPriceFinal,
+            orders,
+            setOrders
         }}>
             {children}
         </CartContext.Provider>

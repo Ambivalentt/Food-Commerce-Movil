@@ -1,3 +1,4 @@
+import { OrdersProps } from "../Orders/InterfaceOrder";
 export interface ProductInterface {
   id: string;
   category?: string;
@@ -23,7 +24,7 @@ export interface CartProviderTemporal {
   id: string; 
   baseProduct: ProductInterface; 
   quantity: number; 
-  time:string;
+  time?:string;
   selectedComplements: CartComeplements[]; 
 };
 
@@ -32,7 +33,7 @@ export interface CartProviderFinal {
   price: number;
   baseProduct: ProductInterface; 
   quantity: number; 
-  time:string;
+  time?:string;
   selectedComplements: ProductInterface[]; 
 
 }[]
@@ -45,4 +46,6 @@ export interface CartContextProps {
   setCartProductsTemporal: (product: CartProviderTemporal | undefined) => void;
   totalPriceFinal?:number;
   setTotalPriceFinal?: (price:number) => void;
+  orders: OrdersProps[];
+  setOrders: React.Dispatch<React.SetStateAction<OrdersProps[]>>;
 }

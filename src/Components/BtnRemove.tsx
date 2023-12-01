@@ -2,7 +2,7 @@ import { MdDeleteForever } from "react-icons/md";
 import {CartContextProps} from "../Context/InterfaceCart"
 import { useCart } from "../Context/CartProvider"
 
-const BtnRemove = ( {productTime}  : {productTime:string}) => {
+const BtnRemove = ( {productTime}  : {productTime:string | undefined}) => {
 
     const {cartProducts , setCartProducts} = useCart() as CartContextProps;
 
